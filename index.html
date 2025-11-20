@@ -162,7 +162,20 @@
             const ctx = canvas.getContext('2d');
             
             let particles = [];
-            const keywordSet = new Set(['git', 'docker', 'npm', 'linux', 'python', 'js', 'css', 'html']);
+            const keywordSet = new Set(['docker', 'git', 'tar', 'python', 'jq', 'go', 'sed', 'awk', 'textdiff']);
+
+            function loadCachedKeywords() {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('cheatsheet_')) {
+                        const query = key.substring('cheatsheet_'.length);
+                        if (query) {
+                            keywordSet.add(query);
+                        }
+                    }
+                }
+            }
+            loadCachedKeywords();
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -240,6 +253,20 @@
                 const query = searchInput.value.trim().toLowerCase();
                 if (!query) return;
 
+                // Check cache first
+                const cachedResult = localStorage.getItem(`cheatsheet_${query}`);
+                if (cachedResult) {
+                    resultCode.className = `language-${query}`;
+                    resultCode.textContent = cachedResult;
+                    Prism.highlightElement(resultCode);
+                    
+                    if (!keywordSet.has(query)) {
+                        keywordSet.add(query);
+                        particles.push(new Particle(query));
+                    }
+                    return;
+                }
+
                 resultCode.textContent = `Loading cheat sheet for "${query}"...`;
                 resultCode.className = 'language-text';
                 Prism.highlightElement(resultCode);
@@ -259,9 +286,17 @@
                     const preElement = doc.querySelector('pre');
 
                     if (preElement) {
+                        const cheatSheetText = preElement.textContent;
                         resultCode.className = `language-${query}`;
-                        resultCode.textContent = preElement.textContent;
+                        resultCode.textContent = cheatSheetText;
                         Prism.highlightElement(resultCode);
+
+                        // Cache the result
+                        try {
+                            localStorage.setItem(`cheatsheet_${query}`, cheatSheetText);
+                        } catch (e) {
+                            console.error("Failed to cache result:", e);
+                        }
 
                         if (!keywordSet.has(query)) {
                             keywordSet.add(query);
@@ -287,6 +322,32 @@
                     performSearch();
                 }
             });
+
+            canvas.addEventListener('click', (event) => {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+
+                for (const particle of particles) {
+                    const dx = mouseX - particle.x;
+                    const dy = mouseY - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < particle.radius) {
+                        handleParticleClick(particle);
+                        break; 
+                    }
+                }
+            });
+
+            function handleParticleClick(particle) {
+                if (particle.text === 'textdiff') {
+                    window.location.href = 'textdiff/index.html';
+                } else {
+                    searchInput.value = particle.text;
+                    performSearch();
+                }
+            }
             
             Prism.highlightElement(resultCode);
         });

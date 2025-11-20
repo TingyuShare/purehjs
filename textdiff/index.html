@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Compare Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Text Compare Tool</h1>
+    <div class="container">
+        <div class="text-input">
+            <h2>Original Text</h2>
+            <textarea id="text1" placeholder="Paste the first text here..."></textarea>
+        </div>
+        <div class="text-input">
+            <h2>Changed Text</h2>
+            <textarea id="text2" placeholder="Paste the second text here..."></textarea>
+        </div>
+    </div>
+    <div class="diff-container">
+        <div id="diff-left" class="diff-panel"></div>
+        <div id="diff-right" class="diff-panel"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
