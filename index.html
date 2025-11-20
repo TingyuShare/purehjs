@@ -162,7 +162,7 @@
             const ctx = canvas.getContext('2d');
             
             let particles = [];
-            const keywordSet = new Set(['docker', 'git', 'tar', 'python', 'jq', 'go', 'sed', 'awk', 'textdiff']);
+            const keywordSet = new Set(['docker', 'git', 'tar', 'python', 'jq', 'go', 'sed', 'awk', 'textdiff', 'date-time', 'url', 'cron']);
 
             function loadCachedKeywords() {
                 for (let i = 0; i < localStorage.length; i++) {
@@ -343,6 +343,12 @@
             function handleParticleClick(particle) {
                 if (particle.text === 'textdiff') {
                     window.location.href = 'textdiff/index.html';
+                } else if (particle.text === 'date-time') {
+                    window.location.href = 'date-time/index.html';
+                } else if (particle.text === 'url') {
+                    window.location.href = 'URL/index.html';
+                } else if (particle.text === 'cron') {
+                    window.location.href = 'crontab-gen/index.html';
                 } else {
                     searchInput.value = particle.text;
                     performSearch();

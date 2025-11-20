@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>URL Tools</h1>
+
+    <!-- URL Encoder/Decoder Section -->
+    <div class="tool-section">
+        <h2>URL Encoder / Decoder</h2>
+        <textarea id="url-encode-input" rows="5" placeholder="Enter string to encode or decode..."></textarea>
+        <div class="button-group">
+            <button id="encode-btn">Encode</button>
+            <button id="decode-btn">Decode</button>
+        </div>
+        <textarea id="url-encode-output" rows="5" readonly placeholder="Output..."></textarea>
+    </div>
+
+    <!-- URL Parser Section -->
+    <div class="tool-section">
+        <h2>URL Parser</h2>
+        <input type="text" id="url-parse-input" placeholder="e.g., https://hi:world@4040940.xyz:8080/url-parser?key1=value1&key2=value2#the-hash">
+        <div id="url-parse-output">
+            <!-- Parsed components will be displayed here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

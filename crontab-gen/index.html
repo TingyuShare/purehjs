@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crontab Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Crontab Generator</h1>
+    <p class="description">Create a cron schedule by filling in the fields below. Use standard cron syntax (e.g., *, */5, 1-10, 5,10).</p>
+
+    <div class="generator-container">
+        <div class="field">
+            <label>Minute</label>
+            <input type="text" id="minute" value="30">
+        </div>
+        <div class="field">
+            <label>Hour</label>
+            <input type="text" id="hour" value="2">
+        </div>
+        <div class="field">
+            <label>Day (Month)</label>
+            <input type="text" id="day-month" value="*">
+        </div>
+        <div class="field">
+            <label>Month</label>
+            <input type="text" id="month" value="*">
+        </div>
+        <div class="field">
+            <label>Day (Week)</label>
+            <input type="text" id="day-week" value="*">
+        </div>
+    </div>
+    <div class="command-container">
+        <label>Command</label>
+        <input type="text" id="command" value="bash /tmp/hi.sh >> /tmp/hi.log 2>&1 &">
+    </div>
+
+    <div class="result-container">
+        <h3>Generated Crontab</h3>
+        <div id="cron-string" class="output"></div>
+        <h3>Explanation</h3>
+        <div id="cron-explanation" class="output"></div>
+        <h3>Next 5 Trigger Times (in your local timezone)</h3>
+        <div id="cron-times" class="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
