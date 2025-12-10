@@ -71,3 +71,18 @@ h1 {
 .output-card p span:first-child {
     color: #586069;
 }
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+footer a {
+    color: #0366d6;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}

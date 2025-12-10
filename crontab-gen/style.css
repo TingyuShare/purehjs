@@ -76,3 +76,18 @@ h1 {
     font-weight: 600;
     color: #0366d6;
 }
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+footer a {
+    color: #0366d6;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}

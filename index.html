@@ -129,6 +129,22 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
         }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: #aaa; /* Lighter text for dark background */
+            position: relative; /* To ensure it's not overlapped by canvas */
+            z-index: 1;
+        }
+        footer a {
+            color: var(--primary-color); /* Use existing CSS variable */
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -149,6 +165,12 @@
 # 2. Press Enter or click 'Search'
 # 3. View the cheat sheet for git</code></pre>
         </div>
+        <footer>
+            <p>
+                Made with ❤️ by xiuzhi.
+                <a href="https://ko-fi.com/xiuzhi" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a>
+            </p>
+        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
@@ -256,7 +278,7 @@
                 // Check cache first
                 const cachedResult = localStorage.getItem(`cheatsheet_${query}`);
                 if (cachedResult) {
-                    resultCode.className = `language-${query}`;
+                    resultCode.className = `language-markdown`;
                     resultCode.textContent = cachedResult;
                     Prism.highlightElement(resultCode);
                     
@@ -272,7 +294,7 @@
                 Prism.highlightElement(resultCode);
 
                 try {
-                    const response = await fetch(`https://cheatsh.4040940.xyz/${encodeURIComponent(query)}`, {
+                    const response = await fetch(`https://cheatsh.4040940.xyz/${encodeURIComponent(query)}?T`, {
                         method: 'POST'
                     });
                     
@@ -280,15 +302,17 @@
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
                     const cheatSheetText = await response.text();
+                    const ansiRegex = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
+                    const cleanCheatSheetText = cheatSheetText.replace(ansiRegex, '');
 
-                    if (cheatSheetText) {
-                        resultCode.className = `language-${query}`;
-                        resultCode.textContent = cheatSheetText;
+                    if (cleanCheatSheetText) {
+                        resultCode.className = `language-markdown`;
+                        resultCode.textContent = cleanCheatSheetText;
                         Prism.highlightElement(resultCode);
 
                         // Cache the result
                         try {
-                            localStorage.setItem(`cheatsheet_${query}`, cheatSheetText);
+                            localStorage.setItem(`cheatsheet_${query}`, cleanCheatSheetText);
                         } catch (e) {
                             console.error("Failed to cache result:", e);
                         }
