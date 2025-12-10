@@ -272,21 +272,16 @@
                 Prism.highlightElement(resultCode);
 
                 try {
-                    const proxyUrl = 'https://api.allorigins.win/raw?url=';
-                    const targetUrl = `https://cheat.sh/${encodeURIComponent(query)}`;
-                    const response = await fetch(`${proxyUrl}${encodeURIComponent(targetUrl)}`);
+                    const response = await fetch(`https://cheatsh.4040940.xyz/${encodeURIComponent(query)}`, {
+                        method: 'POST'
+                    });
                     
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
-                    const htmlText = await response.text();
+                    const cheatSheetText = await response.text();
 
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(htmlText, 'text/html');
-                    const preElement = doc.querySelector('pre');
-
-                    if (preElement) {
-                        const cheatSheetText = preElement.textContent;
+                    if (cheatSheetText) {
                         resultCode.className = `language-${query}`;
                         resultCode.textContent = cheatSheetText;
                         Prism.highlightElement(resultCode);
@@ -304,7 +299,7 @@
                         }
                     } else {
                         resultCode.className = 'language-text';
-                        resultCode.textContent = 'Could not find cheat sheet content.\n\nResponse content:\n' + (htmlText.substring(0, 500) || '(empty)');
+                        resultCode.textContent = 'Could not find cheat sheet content.';
                         Prism.highlightElement(resultCode);
                     }
 
