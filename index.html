@@ -184,7 +184,7 @@
             const ctx = canvas.getContext('2d');
             
             let particles = [];
-            const keywordSet = new Set(['docker', 'git', 'tar', 'python', 'jq', 'go', 'sed', 'awk', 'textdiff', 'date-time', 'url', 'cron']);
+            const keywordSet = new Set(['docker', 'git', 'tar', 'python', 'jq', 'go', 'sed', 'awk', 'textdiff', 'date-time', 'url', 'cron', 'iptv']);
 
             function loadCachedKeywords() {
                 for (let i = 0; i < localStorage.length; i++) {
@@ -368,6 +368,8 @@
                     window.location.href = 'URL/index.html';
                 } else if (particle.text === 'cron') {
                     window.location.href = 'crontab-gen/index.html';
+                } else if (particle.text === 'iptv') {
+                    window.location.href = 'iptv/index.html';
                 } else {
                     searchInput.value = particle.text;
                     performSearch();
