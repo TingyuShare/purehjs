@@ -222,6 +222,7 @@
         .tool-card:nth-child(13) { animation: cardIn 0.6s ease-out 1.6s both; }
         .tool-card:nth-child(14) { animation: cardIn 0.6s ease-out 1.7s both; }
         .tool-card:nth-child(15) { animation: cardIn 0.6s ease-out 1.8s both; }
+        .tool-card:nth-child(16) { animation: cardIn 0.6s ease-out 1.9s both; }
 
         @keyframes cardIn {
             from { opacity: 0; transform: translateY(40px) scale(0.9); }
@@ -396,6 +397,11 @@
                 <div class="card-title">HTML Escape</div>
                 <div class="card-desc">Entity escape</div>
             </div>
+            <div class="tool-card" onclick="window.location.href='ssh-keygen/index.html'">
+                <span class="icon" style="color: #06b6d4;">SSH</span>
+                <div class="card-title">SSH Key</div>
+                <div class="card-desc">Ed25519 / RSA</div>
+            </div>
         </div>
     </div>
 
@@ -417,7 +423,7 @@
 
             const keywords = [
                 // Tools (linked)
-                'textdiff', 'date-time', 'url', 'cron', 'iptv',
+                'textdiff', 'date-time', 'url', 'cron', 'iptv', 'ssh-keygen',
                 // Languages & Runtimes
                 'javascript', 'typescript', 'python', 'rust', 'go', 'java', 'c++',
                 'node', 'deno', 'bun', 'php', 'ruby', 'swift', 'kotlin',

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH Key Generator</title>
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../tool-layout.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>SSH Key Generator</h1>
+        <p class="subtitle">Generate Ed25519 / RSA key pairs — PuTTYgen alternative</p>
+
+        <div class="toolbar">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center">
+                <div style="display:flex;align-items:center;gap:6px">
+                    <label style="margin:0;text-transform:none">Type:</label>
+                    <select id="key-type" style="width:auto;padding:6px 10px">
+                        <option value="ed25519">Ed25519</option>
+                        <option value="rsa-2048">RSA 2048</option>
+                        <option value="rsa-4096">RSA 4096</option>
+                    </select>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                    <label style="margin:0;text-transform:none">Comment:</label>
+                    <input type="text" id="comment" placeholder="user@host" style="width:200px;padding:6px 10px">
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button id="gen-btn" class="tool-btn primary">Generate Key Pair</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="result-grid" style="margin-top:12px">
+            <div class="result-card">
+                <div class="result-card-header">Public Key <button class="copy-btn" onclick="copyCard('pub-key')">Copy</button></div>
+                <div class="result-card-body" id="pub-key" style="word-break:break-all;white-space:pre-wrap;max-height:300px"><span class="empty-state">Click Generate</span></div>
+            </div>
+            <div class="result-card">
+                <div class="result-card-header">Private Key (OpenSSH) <button class="copy-btn" onclick="copyCard('priv-key')">Copy</button></div>
+                <div class="result-card-body" id="priv-key" style="word-break:break-all;white-space:pre-wrap;max-height:300px"><span class="empty-state">Click Generate</span></div>
+            </div>
+        </div>
+
+        <div class="result-card" style="margin-top:12px">
+            <div class="result-card-header">Fingerprint <button class="copy-btn" onclick="copyCard('fingerprint')">Copy</button></div>
+            <div class="result-card-body" id="fingerprint"><span class="empty-state">—</span></div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
