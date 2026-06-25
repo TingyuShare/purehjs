@@ -1,7 +1,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0d1117;
-    color: #c9d1d9;
+    background-color: var(--bg-1);
+    color: var(--text-1);
     margin: 0;
     padding: 20px 24px;
     min-height: 100vh;
@@ -11,14 +11,14 @@ body {
 h1 {
     text-align: center;
     font-weight: 300;
-    color: #58a6ff;
+    color: var(--accent);
     margin: 0 0 4px 0;
     font-size: 22px;
 }
 .subtitle {
     text-align: center;
     font-size: 12px;
-    color: #484f58;
+    color: var(--text-3);
     margin-bottom: 12px;
 }
 /* Toolbar */
@@ -32,17 +32,17 @@ h1 {
     padding: 6px 16px;
     font-size: 12px;
     font-weight: 600;
-    border: 1px solid #30363d;
+    border: 1px solid var(--border-1);
     border-radius: 6px;
-    background-color: #21262d;
-    color: #c9d1d9;
+    background-color: var(--bg-4);
+    color: var(--text-1);
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
 }
 .tool-btn:hover {
-    background-color: #30363d;
-    border-color: #484f58;
+    background-color: var(--border-1);
+    border-color: var(--text-3);
 }
 .tool-btn:active {
     transform: scale(0.96);
@@ -63,7 +63,7 @@ h2 {
     font-weight: 400;
     font-size: 12px;
     margin: 0 0 4px 2px;
-    color: #484f58;
+    color: var(--text-3);
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
@@ -72,10 +72,10 @@ textarea {
     height: 180px;
     box-sizing: border-box;
     padding: 10px 12px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--border-1);
     border-radius: 6px;
-    background-color: #161b22;
-    color: #c9d1d9;
+    background-color: var(--bg-2);
+    color: var(--text-1);
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-size: 12px;
     line-height: 1.6;
@@ -84,15 +84,15 @@ textarea {
 }
 textarea:focus {
     outline: none;
-    border-color: #58a6ff;
+    border-color: var(--accent);
     box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.15);
 }
 /* Diff container */
 .diff-container {
     flex: 1;
-    border: 1px solid #30363d;
+    border: 1px solid var(--border-1);
     border-radius: 8px;
-    background-color: #161b22;
+    background-color: var(--bg-2);
     overflow: auto;
     min-height: 200px;
 }
@@ -105,23 +105,23 @@ textarea:focus {
 .diff-file-header {
     padding: 10px 16px;
     background-color: #1c2333;
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid var(--border-1);
     display: flex;
     gap: 20px;
     font-size: 12px;
     font-weight: 600;
 }
-.file-old { color: #f85149; }
-.file-new { color: #3fb950; }
+.file-old { color: var(--error); }
+.file-new { color: var(--success); }
 /* Hunk header */
 .diff-hunk-header {
     padding: 6px 16px;
     background-color: rgba(56, 139, 253, 0.1);
-    color: #58a6ff;
+    color: var(--accent);
     font-size: 12px;
     font-weight: 600;
-    border-top: 1px solid #30363d;
-    border-bottom: 1px solid #30363d;
+    border-top: 1px solid var(--border-1);
+    border-bottom: 1px solid var(--border-1);
 }
 /* Diff lines */
 .diff-line {
@@ -146,9 +146,9 @@ textarea:focus {
     user-select: none;
     font-weight: 700;
 }
-.diff-line.context .line-prefix { color: #484f58; }
-.diff-line.removed .line-prefix { color: #f85149; }
-.diff-line.added .line-prefix { color: #3fb950; }
+.diff-line.context .line-prefix { color: var(--text-3); }
+.diff-line.removed .line-prefix { color: var(--error); }
+.diff-line.added .line-prefix { color: var(--success); }
 .line-content {
     padding: 0 16px 0 0;
     white-space: pre;
@@ -159,7 +159,7 @@ textarea:focus {
 .diff-identical {
     text-align: center;
     padding: 40px 16px;
-    color: #484f58;
+    color: var(--text-3);
     font-style: italic;
 }
 /* Footer */
@@ -168,11 +168,11 @@ footer {
     margin-top: 12px;
     padding: 8px 0;
     font-size: 12px;
-    color: #484f58;
+    color: var(--text-3);
     flex-shrink: 0;
 }
 footer a {
-    color: #58a6ff;
+    color: var(--accent);
     text-decoration: none;
 }
 footer a:hover {
