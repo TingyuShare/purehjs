@@ -104,7 +104,7 @@ textarea:focus {
 /* File header */
 .diff-file-header {
     padding: 10px 16px;
-    background-color: #1c2333;
+    background-color: var(--bg-3);
     border-bottom: 1px solid var(--border-1);
     display: flex;
     gap: 20px;
