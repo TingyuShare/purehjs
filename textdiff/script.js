@@ -1,130 +1,138 @@
-// A more robust diff function based on Longest Common Subsequence (LCS)
-function diffLines(oldStr, newStr) {
-    const oldLines = oldStr.split('\n');
-    const newLines = newStr.split('\n');
-    const result = [];
+document.addEventListener('DOMContentLoaded', () => {
+    const text1Input = document.getElementById('text1');
+    const text2Input = document.getElementById('text2');
+    const diffOutput = document.getElementById('diff-output');
+    const swapBtn = document.getElementById('swap-btn');
+    const clearBtn = document.getElementById('clear-btn');
 
-    const lcs = [];
-    for (let i = 0; i <= oldLines.length; i++) {
-        lcs[i] = new Array(newLines.length + 1).fill(0);
-    }
+    if (!text1Input || !text2Input || !diffOutput) return;
 
-    for (let i = 1; i <= oldLines.length; i++) {
-        for (let j = 1; j <= newLines.length; j++) {
-            if (oldLines[i - 1] === newLines[j - 1]) {
-                lcs[i][j] = lcs[i - 1][j - 1] + 1;
+    const CTX = 3; // context lines around changes
+
+    // LCS diff
+    function lcsDiff(oldLines, newLines) {
+        const m = oldLines.length, n = newLines.length;
+        const dp = Array.from({ length: m + 1 }, () => new Uint16Array(n + 1));
+        for (let i = 1; i <= m; i++)
+            for (let j = 1; j <= n; j++)
+                dp[i][j] = oldLines[i-1] === newLines[j-1] ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j], dp[i][j-1]);
+
+        const ops = [];
+        let i = m, j = n;
+        while (i > 0 || j > 0) {
+            if (i > 0 && j > 0 && oldLines[i-1] === newLines[j-1]) {
+                ops.unshift({ type: ' ', value: oldLines[i-1], oi: i-1, ni: j-1 });
+                i--; j--;
+            } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+                ops.unshift({ type: '+', value: newLines[j-1], ni: j-1 });
+                j--;
             } else {
-                lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
+                ops.unshift({ type: '-', value: oldLines[i-1], oi: i-1 });
+                i--;
             }
         }
+        return ops;
     }
 
-    let i = oldLines.length;
-    let j = newLines.length;
-    while (i > 0 || j > 0) {
-        if (i > 0 && j > 0 && oldLines[i - 1] === newLines[j - 1]) {
-            result.unshift({ value: oldLines[i - 1] });
-            i--;
-            j--;
-        } else if (j > 0 && (i === 0 || lcs[i][j - 1] >= lcs[i - 1][j])) {
-            result.unshift({ value: newLines[j - 1], added: true });
-            j--;
-        } else if (i > 0 && (j === 0 || lcs[i][j - 1] < lcs[i - 1][j])) {
-            result.unshift({ value: oldLines[i - 1], removed: true });
-            i--;
-        } else {
-            break;
-        }
-    }
+    function buildHunks(ops) {
+        // Find change positions
+        const changeIdx = [];
+        ops.forEach((op, idx) => { if (op.type !== ' ') changeIdx.push(idx); });
 
-    return result;
-}
+        if (changeIdx.length === 0) return [];
 
-const text1Input = document.getElementById('text1');
-const text2Input = document.getElementById('text2');
-const diffLeft = document.getElementById('diff-left');
-const diffRight = document.getElementById('diff-right');
-
-function createLine(number, content, type) {
-    const line = document.createElement('div');
-    const lineNumber = document.createElement('span');
-    lineNumber.className = 'line-number';
-    lineNumber.textContent = number || '';
-
-    const lineContent = document.createElement('span');
-    lineContent.className = 'line-content';
-    lineContent.textContent = content || '';
-    
-    line.appendChild(lineNumber);
-    line.appendChild(lineContent);
-
-    if (type) {
-        line.className = type;
-    }
-    return line;
-}
-
-function addFoldedLine(count) {
-    const line = createLine('', `... ${count} unchanged lines ...`);
-    line.className = 'folded-line';
-    line.style.width = '200%';
-    diffLeft.appendChild(line);
-}
-
-function performCompare() {
-    const text1 = text1Input.value;
-    const text2 = text2Input.value;
-    
-    const diff = diffLines(text1, text2);
-    
-    diffLeft.innerHTML = '';
-    diffRight.innerHTML = '';
-
-    if (text1 === '' && text2 === '') return;
-
-    if (diff.length === 0 && text1 === text2) {
-        const line = document.createElement('div');
-        line.textContent = 'The texts are identical.';
-        line.style.textAlign = 'center';
-        line.style.width = '200%';
-        diffLeft.appendChild(line);
-        return;
-    }
-
-    let leftLineNum = 1;
-    let rightLineNum = 1;
-    let consecutiveCommon = 0;
-
-    diff.forEach(part => {
-        if (part.added || part.removed) {
-            if (consecutiveCommon > 0) {
-                addFoldedLine(consecutiveCommon);
-                consecutiveCommon = 0;
+        // Expand each change with CTX lines, merge overlapping regions
+        const regions = [];
+        changeIdx.forEach(ci => {
+            const start = Math.max(0, ci - CTX);
+            const end = Math.min(ops.length - 1, ci + CTX);
+            if (regions.length > 0 && start <= regions[regions.length-1].end + 1) {
+                regions[regions.length-1].end = end;
+            } else {
+                regions.push({ start, end });
             }
-            if (part.added) {
-                diffLeft.appendChild(createLine('', '', 'diff-added'));
-                diffRight.appendChild(createLine(rightLineNum, '+ ' + part.value, 'diff-added'));
-                rightLineNum++;
-            } else { // removed
-                diffLeft.appendChild(createLine(leftLineNum, '- ' + part.value, 'diff-removed'));
-                diffRight.appendChild(createLine('', '', 'diff-removed'));
-                leftLineNum++;
+        });
+
+        // Build hunks
+        return regions.map(r => {
+            const lines = ops.slice(r.start, r.end + 1);
+            let oldStart = 0, oldCount = 0, newStart = 0, newCount = 0;
+
+            lines.forEach(op => {
+                if (op.type === ' ') { oldStart = (op.oi||0)+1; newStart = (op.ni||0)+1; }
+            });
+
+            // Find actual start line numbers
+            for (const op of lines) {
+                if (op.type === ' ') { oldStart = op.oi + 1; newStart = op.ni + 1; break; }
+                if (op.type === '-') { oldStart = op.oi + 1; newStart = (lines.find(x=>x.type==='+'||x.type===' ')||{ni:0}).ni + 1; break; }
             }
-        } else { // common
-            consecutiveCommon++;
-            leftLineNum++;
-            rightLineNum++;
-        }
+
+            lines.forEach(op => {
+                if (op.type === ' ' || op.type === '-') oldCount++;
+                if (op.type === ' ' || op.type === '+') newCount++;
+            });
+
+            return { header: `@@ -${oldStart},${oldCount} +${newStart},${newCount} @@`, lines };
+        });
+    }
+
+    function escapeHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function performCompare() {
+        const oldText = text1Input.value;
+        const newText = text2Input.value;
+
+        if (oldText === '' && newText === '') { diffOutput.innerHTML = ''; return; }
+        if (oldText === newText) { diffOutput.innerHTML = '<div class="diff-identical">texts are identical</div>'; return; }
+
+        const oldLines = oldText.split('\n').filter(l => l.trim() !== '');
+        const newLines = newText.split('\n').filter(l => l.trim() !== '');
+        const ops = lcsDiff(oldLines, newLines);
+        const hunks = buildHunks(ops);
+
+        let removed = 0, added = 0;
+        ops.forEach(op => { if (op.type === '-') removed++; if (op.type === '+') added++; });
+
+        let html = '<div class="diff-file-header">';
+        html += '<span class="file-old">--- baseline</span>';
+        html += '<span class="file-new">+++ compare</span>';
+        html += '</div>';
+
+        hunks.forEach(hunk => {
+            html += '<div class="diff-hunk-header">' + escapeHtml(hunk.header) + '</div>';
+            hunk.lines.forEach(op => {
+                const cls = op.type === '-' ? 'removed' : op.type === '+' ? 'added' : 'context';
+                const prefix = op.type === ' ' ? ' ' : op.type;
+                html += '<div class="diff-line ' + cls + '">';
+                html += '<span class="line-prefix">' + prefix + '</span>';
+                html += '<span class="line-content">' + escapeHtml(op.value) + '</span>';
+                html += '</div>';
+            });
+        });
+
+        diffOutput.innerHTML = html;
+    }
+
+    let timer = null;
+    function debouncedCompare() { clearTimeout(timer); timer = setTimeout(performCompare, 150); }
+
+    text1Input.addEventListener('input', debouncedCompare);
+    text2Input.addEventListener('input', debouncedCompare);
+
+    swapBtn.addEventListener('click', () => {
+        const tmp = text1Input.value;
+        text1Input.value = text2Input.value;
+        text2Input.value = tmp;
+        performCompare();
     });
 
-    if (consecutiveCommon > 0) {
-        addFoldedLine(consecutiveCommon);
-    }
-}
-
-text1Input.addEventListener('input', performCompare);
-text2Input.addEventListener('input', performCompare);
-
-// Initial comparison on page load
-performCompare();
+    clearBtn.addEventListener('click', () => {
+        text1Input.value = '';
+        text2Input.value = '';
+        diffOutput.innerHTML = '';
+    });
+});
 

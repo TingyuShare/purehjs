@@ -8,26 +8,30 @@
 </head>
 <body>
     <h1>Text Compare Tool</h1>
+    <p class="subtitle">Unified diff — left text is baseline</p>
+    <div class="toolbar">
+        <button id="swap-btn" class="tool-btn" title="Swap texts">⇄ Swap</button>
+        <button id="clear-btn" class="tool-btn" title="Clear all">✕ Clear</button>
+    </div>
     <div class="container">
         <div class="text-input">
-            <h2>Original Text</h2>
-            <textarea id="text1" placeholder="Paste the first text here..."></textarea>
+            <h2>Baseline</h2>
+            <textarea id="text1" placeholder="Paste baseline text here..."></textarea>
         </div>
         <div class="text-input">
-            <h2>Changed Text</h2>
-            <textarea id="text2" placeholder="Paste the second text here..."></textarea>
+            <h2>Compare</h2>
+            <textarea id="text2" placeholder="Paste text to compare..."></textarea>
         </div>
     </div>
     <div class="diff-container">
-        <div id="diff-left" class="diff-panel"></div>
-        <div id="diff-right" class="diff-panel"></div>
+        <div id="diff-output"></div>
     </div>
-    <script src="script.js"></script>
     <footer>
         <p>
             Made with ❤️ by xiuzhi.
             <a href="https://ko-fi.com/xiuzhi" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a>
         </p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
