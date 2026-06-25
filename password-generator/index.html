@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Password Generator</h1>
+        <p class="subtitle">Generate secure random passwords</p>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Password <button class="copy-btn" onclick="copyPass()">Copy</button></label>
+                <div class="output-panel" id="output" style="font-size:18px;text-align:center;padding:20px"><span class="empty-state">Click Generate</span></div>
+            </div>
+        </div>
+        <div class="toolbar">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center">
+                <div style="display:flex;align-items:center;gap:6px">
+                    <label style="margin:0;text-transform:none">Length:</label>
+                    <input type="range" id="length" min="8" max="64" value="20" style="width:120px">
+                    <span id="length-val" style="color:#58a6ff;font-weight:600;min-width:24px">20</span>
+                </div>
+                <div class="toggle-row"><input type="checkbox" id="upper" checked><label for="upper">ABC</label></div>
+                <div class="toggle-row"><input type="checkbox" id="lower" checked><label for="lower">abc</label></div>
+                <div class="toggle-row"><input type="checkbox" id="digits" checked><label for="digits">123</label></div>
+                <div class="toggle-row"><input type="checkbox" id="symbols" checked><label for="symbols">!@#</label></div>
+            </div>
+        </div>
+        <div class="toolbar">
+            <button id="gen-btn" class="tool-btn primary">Generate</button>
+            <button id="gen5-btn" class="tool-btn primary">Generate 5</button>
+        </div>
+        <div id="status"></div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

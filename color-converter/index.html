@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Converter</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Color Converter</h1>
+        <p class="subtitle">Convert between HEX, RGB, and HSL</p>
+        <div class="input-group">
+            <div class="input-half">
+                <label>HEX</label>
+                <input type="text" id="hex" placeholder="#58a6ff">
+            </div>
+            <div class="input-half">
+                <label>RGB</label>
+                <input type="text" id="rgb" placeholder="rgb(88, 166, 255)">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-half">
+                <label>HSL</label>
+                <input type="text" id="hsl" placeholder="hsl(212, 100%, 67%)">
+            </div>
+            <div class="input-half">
+                <label>Preview</label>
+                <div id="preview" style="height:44px;border-radius:6px;border:1px solid #30363d"></div>
+            </div>
+        </div>
+        <div class="toolbar">
+            <button id="from-hex" class="tool-btn">HEX → RGB/HSL</button>
+            <button id="from-rgb" class="tool-btn">RGB → HEX/HSL</button>
+            <button id="from-hsl" class="tool-btn">HSL → HEX/RGB</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div id="status"></div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

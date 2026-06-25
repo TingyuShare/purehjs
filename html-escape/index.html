@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Escape</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>HTML Escape / Unescape</h1>
+        <p class="subtitle">Escape or unescape HTML entities</p>
+        <div class="toolbar">
+            <button id="escape-btn" class="tool-btn primary">Escape →</button>
+            <button id="unescape-btn" class="tool-btn primary">← Unescape</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div class="input-group">
+            <div class="input-half">
+                <label>Input</label>
+                <textarea id="input" placeholder="Enter HTML or escaped text..."></textarea>
+            </div>
+            <div class="input-half">
+                <label>Output <button class="copy-btn" onclick="copyOutput()">Copy</button></label>
+                <div class="output-panel" id="output"><span class="empty-state">Result will appear here</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID Generator</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>UUID Generator</h1>
+        <p class="subtitle">Generate UUID v4 identifiers</p>
+        <div class="toolbar">
+            <button id="gen1" class="tool-btn primary">Generate 1</button>
+            <button id="gen5" class="tool-btn primary">Generate 5</button>
+            <button id="gen10" class="tool-btn primary">Generate 10</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div id="status"></div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Generated UUIDs <button class="copy-btn" onclick="copyAll()">Copy All</button></label>
+                <div class="output-panel" id="output"><span class="empty-state">Click a button to generate UUIDs</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

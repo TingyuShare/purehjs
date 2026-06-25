@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Decoder</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>JWT Decoder</h1>
+        <p class="subtitle">Decode JSON Web Tokens — header, payload, signature</p>
+        <div class="toolbar">
+            <button id="decode-btn" class="tool-btn primary">Decode</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>JWT Token</label>
+                <textarea id="input" placeholder="Paste a JWT token here..." style="height:100px"></textarea>
+            </div>
+        </div>
+        <div id="status"></div>
+        <div class="result-grid">
+            <div class="result-card">
+                <div class="result-card-header">Header <button class="copy-btn" onclick="copyCard('header')">Copy</button></div>
+                <div class="result-card-body" id="header"><span class="empty-state">—</span></div>
+            </div>
+            <div class="result-card">
+                <div class="result-card-header">Payload <button class="copy-btn" onclick="copyCard('payload')">Copy</button></div>
+                <div class="result-card-body" id="payload"><span class="empty-state">—</span></div>
+            </div>
+        </div>
+        <div class="result-card" style="margin-top:12px">
+            <div class="result-card-header">Raw Signature <button class="copy-btn" onclick="copyCard('signature')">Copy</button></div>
+            <div class="result-card-body" id="signature"><span class="empty-state">—</span></div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

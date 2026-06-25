@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Regex Tester</h1>
+        <p class="subtitle">Test regular expressions with live matching</p>
+        <div class="input-group">
+            <div class="input-half">
+                <label>Pattern</label>
+                <input type="text" id="pattern" placeholder="e.g. \d+|[a-z]+">
+            </div>
+            <div class="input-half">
+                <label>Flags</label>
+                <input type="text" id="flags" placeholder="g i m s" value="g">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Test String</label>
+                <textarea id="test-string" placeholder="Enter text to test against..." style="height:150px"></textarea>
+            </div>
+        </div>
+        <div id="status"></div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Matches</label>
+                <div class="output-panel" id="output"><span class="empty-state">Enter a pattern and test string</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

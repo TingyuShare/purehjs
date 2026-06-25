@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp Converter</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Timestamp Converter</h1>
+        <p class="subtitle">Unix timestamp ↔ human readable date</p>
+        <div class="toolbar">
+            <button id="now-btn" class="tool-btn primary">Current Time</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div class="input-group">
+            <div class="input-half">
+                <label>Unix Timestamp (seconds)</label>
+                <input type="text" id="timestamp" placeholder="e.g. 1719331200">
+            </div>
+            <div class="input-half">
+                <label>Date / Time</label>
+                <input type="text" id="datetime" placeholder="e.g. 2024-06-25 12:00:00">
+            </div>
+        </div>
+        <div class="toolbar" style="margin-top:4px">
+            <button id="to-date-btn" class="tool-btn">Timestamp → Date</button>
+            <button id="to-ts-btn" class="tool-btn">Date → Timestamp</button>
+        </div>
+        <div id="status"></div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Results</label>
+                <div class="output-panel" id="output"><span class="empty-state">Enter a timestamp or date to convert</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

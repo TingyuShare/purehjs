@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Generator</title>
+    <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Hash Generator</h1>
+        <p class="subtitle">Generate MD5, SHA-1, SHA-256, SHA-512 hashes</p>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Input Text</label>
+                <textarea id="input" placeholder="Enter text to hash..." style="height:120px"></textarea>
+            </div>
+        </div>
+        <div class="toolbar">
+            <button id="generate-btn" class="tool-btn primary">Generate</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div id="status"></div>
+        <div class="result-grid">
+            <div class="result-card">
+                <div class="result-card-header">MD5 <button class="copy-btn" onclick="copyCard('md5')">Copy</button></div>
+                <div class="result-card-body" id="md5"><span class="empty-state">—</span></div>
+            </div>
+            <div class="result-card">
+                <div class="result-card-header">SHA-1 <button class="copy-btn" onclick="copyCard('sha1')">Copy</button></div>
+                <div class="result-card-body" id="sha1"><span class="empty-state">—</span></div>
+            </div>
+            <div class="result-card">
+                <div class="result-card-header">SHA-256 <button class="copy-btn" onclick="copyCard('sha256')">Copy</button></div>
+                <div class="result-card-body" id="sha256"><span class="empty-state">—</span></div>
+            </div>
+            <div class="result-card">
+                <div class="result-card-header">SHA-512 <button class="copy-btn" onclick="copyCard('sha512')">Copy</button></div>
+                <div class="result-card-body" id="sha512"><span class="empty-state">—</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

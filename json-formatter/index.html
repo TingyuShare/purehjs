@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>JSON Formatter</h1>
+        <p class="subtitle">Format, validate, minify, and convert JSON</p>
+        <div class="toolbar">
+            <button id="format-btn" class="tool-btn primary">Format</button>
+            <button id="minify-btn" class="tool-btn">Minify</button>
+            <button id="validate-btn" class="tool-btn">Validate</button>
+            <button id="clear-btn" class="tool-btn">Clear</button>
+        </div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Input</label>
+                <textarea id="input" placeholder='Paste JSON here... e.g. {"name":"test","items":[1,2,3]}'></textarea>
+            </div>
+        </div>
+        <div id="status"></div>
+        <div class="input-group">
+            <div class="input-full">
+                <label>Output <button class="copy-btn" onclick="copyOutput()">Copy</button></label>
+                <div class="output-panel" id="output"><span class="empty-state">Result will appear here</span></div>
+            </div>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="script.js"></script>
+</body>
+</html>
