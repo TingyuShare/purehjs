@@ -104,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function base64ToUint8Array(b64) {
-        const bin = atob(b64);
+        // JWK uses base64url, atob needs standard base64
+        let std = b64.replace(/-/g, '+').replace(/_/g, '/');
+        while (std.length % 4) std += '=';
+        const bin = atob(std);
         const arr = new Uint8Array(bin.length);
         for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
         return arr;
