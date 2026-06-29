@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP & Domain Info</title>
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../tool-layout.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>IP & Domain Info</h1>
+        <p class="subtitle">Query IP geolocation and domain WHOIS information</p>
+
+        <div class="tool-grid">
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>IP Lookup</h2>
+                    <span>Geolocation</span>
+                </div>
+                <div class="input-group">
+                    <div class="input-full">
+                        <label for="ip-input">IP address</label>
+                        <input id="ip-input" type="text" placeholder="Leave empty to query your current IP" />
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <button id="ip-btn" class="tool-btn primary">Query IP</button>
+                    <button id="ip-current-btn" class="tool-btn">Current IP</button>
+                </div>
+                <div id="ip-status" class="status info">Enter an IP or use the current IP button.</div>
+                <pre id="ip-output" class="output-panel">Result will appear here.</pre>
+            </section>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Domain Lookup</h2>
+                    <span>WHOIS / RDAP</span>
+                </div>
+                <div class="input-group">
+                    <div class="input-full">
+                        <label for="domain-input">Domain name</label>
+                        <input id="domain-input" type="text" placeholder="e.g. example.com" />
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <button id="domain-btn" class="tool-btn primary">Query WHOIS</button>
+                </div>
+                <div id="domain-status" class="status info">Enter a domain name to inspect registration details.</div>
+                <pre id="domain-output" class="output-panel">Result will appear here.</pre>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a></p>
+    </footer>
+
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
