@@ -1,0 +1,241 @@
+/* Cheat Sheet tool specific styles */
+.search-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.search-box input {
+    flex: 1;
+    padding: 10px 14px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+}
+.search-box .tool-btn {
+    padding: 6px 14px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.cheat-output {
+    padding: 0;
+    background: transparent;
+    border: none;
+    white-space: normal;
+    word-break: normal;
+    overflow: auto;
+    min-height: 200px;
+}
+
+/* Category / command title */
+.cmd-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--header-bg);
+    border: 1px solid var(--border-1);
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+}
+.cmd-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, monospace;
+}
+.cmd-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Example block */
+.example-block {
+    border: 1px solid var(--border-1);
+    border-top: 1px solid var(--border-2);
+    background: var(--card-bg);
+}
+.example-block:first-of-type {
+    border-top: 1px solid var(--border-1);
+}
+.example-block:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.example-desc {
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--text-2);
+    border-bottom: 1px solid var(--border-2);
+    background: var(--header-bg);
+}
+
+.example-code {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 16px;
+    position: relative;
+}
+.example-code pre {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    color: var(--text-1);
+    line-height: 1.6;
+    flex: 1;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+.example-code .copy-btn {
+    margin-left: 8px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* Related commands */
+.related-section {
+    margin-top: 14px;
+    padding-left: 16px;
+}
+.related-section h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.related-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.related-item {
+    padding: 3px 10px;
+    font-size: 12px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    border: 1px solid var(--border-1);
+    border-radius: 4px;
+    background: var(--bg-2);
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.related-item:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* Search results dropdown */
+.search-results {
+    border: 1px solid var(--border-1);
+    border-radius: 6px;
+    background: var(--card-bg);
+    margin-bottom: 12px;
+    max-height: 240px;
+    overflow: auto;
+}
+.search-results-item {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    color: var(--text-2);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-2);
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.search-results-item:last-child {
+    border-bottom: none;
+}
+.search-results-item:hover,
+.search-results-item.active {
+    background: var(--bg-3);
+    color: var(--text-1);
+}
+.search-results-item .cmd-name {
+    color: var(--accent);
+    font-weight: 500;
+}
+.search-results-item .count-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--bg-4);
+    color: var(--text-3);
+}
+
+/* Quick links at top */
+.quick-section {
+    margin-bottom: 12px;
+}
+.quick-section h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.quick-chip {
+    padding: 4px 10px;
+    font-size: 11px;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    border: 1px solid var(--border-1);
+    border-radius: 4px;
+    background: var(--bg-2);
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.quick-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+/* Cheat result container */
+.cheat-result { display: flex; flex-direction: column; gap: 0; }
+
+/* Section headers in parsed cheat sheet */
+.cheat-section-header {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-2);
+    background: var(--bg-2);
+    margin-top: 4px;
+}
+
+/* Plain text lines in cheat sheet */
+.cheat-text {
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-2);
+    font-family: inherit;
+}
+
+/* Search results header */
+.search-results-header {
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--text-2);
+    border: 1px solid var(--border-1);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    background: var(--header-bg);
+}

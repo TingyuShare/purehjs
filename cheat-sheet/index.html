@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheat Sheet</title>
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../tool-layout.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>📟 Cheat Sheet</h1>
+        <p class="subtitle">Quick command reference &middot; powered by <a href="https://cheat.sh" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--border-2); padding-bottom: 1px;">cheat.sh</a></p>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search command... (e.g. tar, git, docker, curl)" autocomplete="off">
+            <button id="clear-btn" class="tool-btn">&times;</button>
+        </div>
+        <div id="status"></div>
+        <div id="output" class="output-panel cheat-output">
+            <span class="empty-state">Type a command name above to see usage examples</span>
+        </div>
+    </div>
+    <footer><p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank">Buy me a coffee ☕️</a></p></footer>
+    <script src="../theme.js"></script>
+    <script src="cheatsheets-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
