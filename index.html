@@ -74,15 +74,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             height: 100vh;
-            padding: 20px;
+            padding: 24px 20px 60px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #main-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        #main-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #main-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.2);
+            border-radius: 2px;
         }
 
         /* Title */
         .title-container {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 32px;
+            flex-shrink: 0;
             animation: fadeInUp 1s ease-out;
         }
 
@@ -130,35 +143,92 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Search bar */
+        .search-bar {
+            width: 100%;
+            max-width: 1100px;
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(15, 15, 35, 0.5);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 1rem;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .search-bar .search-count {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+
         /* Tool cards grid */
         .cards-grid {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 14px;
+            width: 100%;
             max-width: 1100px;
-            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .tool-card.hidden {
+            display: none;
         }
 
         .tool-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 28px 32px;
-            width: 160px;
+            border-radius: 14px;
+            padding: 18px 12px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            animation: cardIn 0.6s ease-out both;
         }
 
         .tool-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 1px;
             background: linear-gradient(135deg, transparent 40%, var(--primary) 50%, transparent 60%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -173,72 +243,59 @@
         }
 
         .tool-card:hover {
-            transform: translateY(-8px) scale(1.05);
+            transform: translateY(-6px) scale(1.04);
             border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15),
-                        0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.12),
+                        0 15px 30px rgba(0, 0, 0, 0.25);
         }
 
         .tool-card .icon {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
             display: block;
-            filter: drop-shadow(0 0 8px currentColor);
+            filter: drop-shadow(0 0 6px currentColor);
             transition: transform 0.3s;
         }
 
         .tool-card:hover .icon {
-            transform: scale(1.2) rotate(-5deg);
+            transform: scale(1.15) rotate(-5deg);
         }
 
         .tool-card .card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             color: var(--text);
         }
 
         .tool-card .card-desc {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             color: var(--text-dim);
-            margin-top: 6px;
-            line-height: 1.4;
+            margin-top: 4px;
+            line-height: 1.3;
         }
 
-        /* Staggered entrance */
-        .tool-card:nth-child(1) { animation: cardIn 0.6s ease-out 0.4s both; }
-        .tool-card:nth-child(2) { animation: cardIn 0.6s ease-out 0.5s both; }
-        .tool-card:nth-child(3) { animation: cardIn 0.6s ease-out 0.6s both; }
-        .tool-card:nth-child(4) { animation: cardIn 0.6s ease-out 0.7s both; }
-        .tool-card:nth-child(5) { animation: cardIn 0.6s ease-out 0.8s both; }
-        .tool-card:nth-child(6) { animation: cardIn 0.6s ease-out 0.9s both; }
-        .tool-card:nth-child(7) { animation: cardIn 0.6s ease-out 1.0s both; }
-        .tool-card:nth-child(8) { animation: cardIn 0.6s ease-out 1.1s both; }
-        .tool-card:nth-child(9) { animation: cardIn 0.6s ease-out 1.2s both; }
-        .tool-card:nth-child(10) { animation: cardIn 0.6s ease-out 1.3s both; }
-        .tool-card:nth-child(11) { animation: cardIn 0.6s ease-out 1.4s both; }
-        .tool-card:nth-child(12) { animation: cardIn 0.6s ease-out 1.5s both; }
-        .tool-card:nth-child(13) { animation: cardIn 0.6s ease-out 1.6s both; }
-        .tool-card:nth-child(14) { animation: cardIn 0.6s ease-out 1.7s both; }
-        .tool-card:nth-child(15) { animation: cardIn 0.6s ease-out 1.8s both; }
-        .tool-card:nth-child(16) { animation: cardIn 0.6s ease-out 1.9s both; }
-
+        /* Staggered card entrance via JS */
         @keyframes cardIn {
-            from { opacity: 0; transform: translateY(40px) scale(0.9); }
+            from { opacity: 0; transform: translateY(24px) scale(0.92); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Footer */
         footer {
-            position: fixed;
-            bottom: 20px;
+            position: relative;
             width: 100%;
+            max-width: 1100px;
             text-align: center;
             z-index: 10;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-dim);
-            animation: fadeInUp 1s ease-out 1.3s both;
+            padding: 16px 0 4px;
+            margin-top: 8px;
+            border-top: 1px solid rgba(0, 240, 255, 0.06);
+            flex-shrink: 0;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
         footer a {
@@ -319,98 +376,107 @@
             <p class="subtitle">Click a tool to get started</p>
         </div>
 
-        <div class="cards-grid">
-            <!-- Original tools -->
-            <div class="tool-card" onclick="window.location.href='textdiff/index.html'">
-                <span class="icon" style="color: #00f0ff;">⟺</span>
-                <div class="card-title">TextDiff</div>
-                <div class="card-desc">Compare text</div>
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="tool-search" placeholder="Search tools…" autocomplete="off">
+            <span class="search-count" id="search-count"></span>
+        </div>
+
+        <div class="cards-grid" id="cards-grid">
+            <div class="tool-card" data-tool="ip-domain" onclick="window.location.href='ip-domain-info/index.html'">
+                <span class="icon" style="color: #38bdf8;">🌐</span>
+                <div class="card-title">IP / Domain</div>
+                <div class="card-desc">Lookup info</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='date-time/index.html'">
-                <span class="icon" style="color: #a855f7;">◷</span>
-                <div class="card-title">DateTime</div>
-                <div class="card-desc">Date & time tools</div>
+            <div class="tool-card" data-tool="ping-trace" onclick="window.location.href='ping-traceroute/index.html'">
+                <span class="icon" style="color: #22c55e;">📡</span>
+                <div class="card-title">Ping/Trace</div>
+                <div class="card-desc">Network diag</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='URL/index.html'">
+            <div class="tool-card" data-tool="url" onclick="window.location.href='URL/index.html'">
                 <span class="icon" style="color: #f43f5e;">⇄</span>
                 <div class="card-title">URL Tool</div>
                 <div class="card-desc">Encode / decode</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='crontab-gen/index.html'">
-                <span class="icon" style="color: #22c55e;">⏱</span>
-                <div class="card-title">CronGen</div>
-                <div class="card-desc">Cron expression builder</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='iptv/index.html'">
-                <span class="icon" style="color: #eab308;">▶</span>
-                <div class="card-title">IPTV</div>
-                <div class="card-desc">Stream player</div>
-            </div>
-            <!-- New tools -->
-            <div class="tool-card" onclick="window.location.href='json-formatter/index.html'">
-                <span class="icon" style="color: #f97316;">{ }</span>
-                <div class="card-title">JSON</div>
-                <div class="card-desc">Format / validate</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='base64-tool/index.html'">
-                <span class="icon" style="color: #06b6d4;">B64</span>
-                <div class="card-title">Base64</div>
-                <div class="card-desc">Encode / decode</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='jwt-decoder/index.html'">
-                <span class="icon" style="color: #8b5cf6;">🔑</span>
-                <div class="card-title">JWT</div>
-                <div class="card-desc">Token decoder</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='hash-generator/index.html'">
+            <div class="tool-card" data-tool="hash" onclick="window.location.href='hash-generator/index.html'">
                 <span class="icon" style="color: #ec4899;">#</span>
                 <div class="card-title">Hash</div>
                 <div class="card-desc">MD5 / SHA256</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='regex-tester/index.html'">
-                <span class="icon" style="color: #14b8a6;">.*</span>
-                <div class="card-title">Regex</div>
-                <div class="card-desc">Pattern tester</div>
+            <div class="tool-card" data-tool="jwt" onclick="window.location.href='jwt-decoder/index.html'">
+                <span class="icon" style="color: #8b5cf6;">🔑</span>
+                <div class="card-title">JWT</div>
+                <div class="card-desc">Token decoder</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='uuid-generator/index.html'">
-                <span class="icon" style="color: #eab308;">UUID</span>
-                <div class="card-title">UUID</div>
-                <div class="card-desc">v4 generator</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='timestamp-tool/index.html'">
-                <span class="icon" style="color: #6366f1;">⏳</span>
-                <div class="card-title">Timestamp</div>
-                <div class="card-desc">Unix ↔ date</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='color-converter/index.html'">
-                <span class="icon" style="color: #f472b6;">🎨</span>
-                <div class="card-title">Color</div>
-                <div class="card-desc">HEX / RGB / HSL</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='password-generator/index.html'">
-                <span class="icon" style="color: #22c55e;">🔐</span>
-                <div class="card-title">Password</div>
-                <div class="card-desc">Secure generator</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='html-escape/index.html'">
-                <span class="icon" style="color: #f85149;">&lt;/&gt;</span>
-                <div class="card-title">HTML Escape</div>
-                <div class="card-desc">Entity escape</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='cheat-sheet/index.html'">
-                <span class="icon" style="color: #f97316;">📟</span>
-                <div class="card-title">Cheat Sheet</div>
-                <div class="card-desc">Quick command ref</div>
-            </div>
-            <div class="tool-card" onclick="window.location.href='ssh-keygen/index.html'">
+            <div class="tool-card" data-tool="ssh-key" onclick="window.location.href='ssh-keygen/index.html'">
                 <span class="icon" style="color: #06b6d4;">SSH</span>
                 <div class="card-title">SSH Key</div>
                 <div class="card-desc">Ed25519 / RSA</div>
             </div>
-            <div class="tool-card" onclick="window.location.href='ip-domain-info/index.html'">
-                <span class="icon" style="color: #38bdf8;">🌐</span>
-                <div class="card-title">IP / Domain</div>
-                <div class="card-desc">Lookup info</div>
+            <div class="tool-card" data-tool="password" onclick="window.location.href='password-generator/index.html'">
+                <span class="icon" style="color: #22c55e;">🔐</span>
+                <div class="card-title">Password</div>
+                <div class="card-desc">Secure gen</div>
+            </div>
+            <div class="tool-card" data-tool="json" onclick="window.location.href='json-formatter/index.html'">
+                <span class="icon" style="color: #f97316;">{ }</span>
+                <div class="card-title">JSON</div>
+                <div class="card-desc">Format / validate</div>
+            </div>
+            <div class="tool-card" data-tool="base64" onclick="window.location.href='base64-tool/index.html'">
+                <span class="icon" style="color: #06b6d4;">B64</span>
+                <div class="card-title">Base64</div>
+                <div class="card-desc">Encode / decode</div>
+            </div>
+            <div class="tool-card" data-tool="html-escape" onclick="window.location.href='html-escape/index.html'">
+                <span class="icon" style="color: #f85149;">&lt;/&gt;</span>
+                <div class="card-title">HTML Escape</div>
+                <div class="card-desc">Entity escape</div>
+            </div>
+            <div class="tool-card" data-tool="textdiff" onclick="window.location.href='textdiff/index.html'">
+                <span class="icon" style="color: #00f0ff;">⟺</span>
+                <div class="card-title">TextDiff</div>
+                <div class="card-desc">Compare text</div>
+            </div>
+            <div class="tool-card" data-tool="regex" onclick="window.location.href='regex-tester/index.html'">
+                <span class="icon" style="color: #14b8a6;">.*</span>
+                <div class="card-title">Regex</div>
+                <div class="card-desc">Pattern tester</div>
+            </div>
+            <div class="tool-card" data-tool="cheat-sheet" onclick="window.location.href='cheat-sheet/index.html'">
+                <span class="icon" style="color: #f97316;">📟</span>
+                <div class="card-title">Cheat Sheet</div>
+                <div class="card-desc">Quick ref</div>
+            </div>
+            <div class="tool-card" data-tool="datetime" onclick="window.location.href='date-time/index.html'">
+                <span class="icon" style="color: #a855f7;">◷</span>
+                <div class="card-title">DateTime</div>
+                <div class="card-desc">Date &amp; time</div>
+            </div>
+            <div class="tool-card" data-tool="timestamp" onclick="window.location.href='timestamp-tool/index.html'">
+                <span class="icon" style="color: #6366f1;">⏳</span>
+                <div class="card-title">Timestamp</div>
+                <div class="card-desc">Unix ↔ date</div>
+            </div>
+            <div class="tool-card" data-tool="cron" onclick="window.location.href='crontab-gen/index.html'">
+                <span class="icon" style="color: #22c55e;">⏱</span>
+                <div class="card-title">CronGen</div>
+                <div class="card-desc">Cron builder</div>
+            </div>
+            <div class="tool-card" data-tool="color" onclick="window.location.href='color-converter/index.html'">
+                <span class="icon" style="color: #f472b6;">🎨</span>
+                <div class="card-title">Color</div>
+                <div class="card-desc">HEX / RGB / HSL</div>
+            </div>
+            <div class="tool-card" data-tool="iptv" onclick="window.location.href='iptv/index.html'">
+                <span class="icon" style="color: #eab308;">▶</span>
+                <div class="card-title">IPTV</div>
+                <div class="card-desc">Stream player</div>
+            </div>
+            <div class="tool-card" data-tool="uuid" onclick="window.location.href='uuid-generator/index.html'">
+                <span class="icon" style="color: #eab308;">UUID</span>
+                <div class="card-title">UUID</div>
+                <div class="card-desc">v4 generator</div>
             </div>
         </div>
     </div>
@@ -433,7 +499,9 @@
 
             const keywords = [
                 // Tools (linked)
-                'textdiff', 'date-time', 'url', 'cron', 'iptv', 'ssh-keygen',
+                'textdiff', 'date-time', 'url', 'cron', 'iptv', 'ssh-keygen', 'ping-traceroute',
+                'json', 'base64', 'jwt', 'hash', 'uuid', 'timestamp', 'color',
+                'password', 'html-escape', 'cheat-sheet', 'ip-domain', 'regex',
                 // Languages & Runtimes
                 'javascript', 'typescript', 'python', 'rust', 'go', 'java', 'c++',
                 'node', 'deno', 'bun', 'php', 'ruby', 'swift', 'kotlin',
@@ -606,6 +674,42 @@
 
             initParticles();
             animate();
+
+            // Staggered card entrance
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach((card, i) => {
+                card.style.animationDelay = `${0.4 + i * 0.04}s`;
+            });
+
+            // Search filtering
+            const searchInput = document.getElementById('tool-search');
+            const searchCount = document.getElementById('search-count');
+
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                cards.forEach((card) => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+                    const tool = card.dataset.tool || '';
+                    const matches = !query || title.includes(query) || desc.includes(query) || tool.includes(query);
+
+                    if (matches) {
+                        card.classList.remove('hidden');
+                        // Re-trigger animation
+                        card.style.animation = 'none';
+                        card.offsetHeight; // force reflow
+                        card.style.animation = `cardIn 0.5s ease-out both`;
+                        card.style.animationDelay = `${0.1 + (visibleCount % 12) * 0.04}s`;
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                searchCount.textContent = query ? `${visibleCount}/${cards.length}` : '';
+            });
         });
     </script>
 </body>

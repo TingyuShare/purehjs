@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping & Traceroute</title>
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../tool-layout.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="back-link" href="../index.html">← Back</a>
+    <div class="main">
+        <h1>Ping &amp; Traceroute</h1>
+        <p class="subtitle">HTTP latency test &amp; DNS route analysis</p>
+
+        <!-- Mode selection -->
+        <div class="toolbar">
+            <button id="mode-ping" class="tool-btn primary">Ping</button>
+            <button id="mode-traceroute" class="tool-btn">Traceroute</button>
+        </div>
+
+        <!-- Ping controls -->
+        <div id="ping-controls" class="controls-area">
+            <div class="input-group">
+                <div class="input-full">
+                    <label for="target-input">Target hostname or IP</label>
+                    <input id="target-input" type="text" placeholder="e.g. google.com, 8.8.8.8, 1.1.1.1" />
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-half">
+                    <label for="count-input">Ping count</label>
+                    <input id="count-input" type="number" value="4" min="1" max="20" />
+                </div>
+                <div class="input-half">
+                    <label for="timeout-input">Timeout (ms)</label>
+                    <input id="timeout-input" type="number" value="3000" min="500" max="30000" step="100" />
+                </div>
+            </div>
+            <div class="toolbar">
+                <button id="ping-btn" class="tool-btn primary">Start Ping</button>
+                <button id="ping-stop-btn" class="tool-btn" disabled>Stop</button>
+                <button id="ping-clear-btn" class="tool-btn">Clear</button>
+            </div>
+        </div>
+
+        <!-- Traceroute controls -->
+        <div id="traceroute-controls" class="controls-area" style="display:none">
+            <div class="input-group">
+                <div class="input-full">
+                    <label for="trace-target-input">Target hostname or IP</label>
+                    <input id="trace-target-input" type="text" placeholder="e.g. google.com, 8.8.8.8" />
+                </div>
+            </div>
+            <div class="toolbar">
+                <button id="trace-btn" class="tool-btn primary">Start Route Analysis</button>
+                <button id="trace-clear-btn" class="tool-btn">Clear</button>
+            </div>
+            <div class="trace-notice">
+                <strong>⚠️ Browser limitation:</strong> Real traceroute requires ICMP protocol, which browsers cannot use.
+                This tool shows the <strong>DNS resolution path</strong> — the actual IP addresses your domain resolves to,
+                with geolocation data. For real traceroute, use your terminal:
+                <code>tracert &lt;host&gt;</code> (Windows) or <code>traceroute &lt;host&gt;</code> (Mac/Linux).
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div id="status" class="status info">Enter a target and start pinging, or switch to Traceroute mode.</div>
+
+        <!-- Ping results -->
+        <div id="ping-results" class="results-container">
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Sent</div>
+                    <div class="stat-value" id="stat-sent">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Received</div>
+                    <div class="stat-value" id="stat-received">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Loss</div>
+                    <div class="stat-value" id="stat-loss">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Min</div>
+                    <div class="stat-value" id="stat-min">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Max</div>
+                    <div class="stat-value" id="stat-max">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg</div>
+                    <div class="stat-value" id="stat-avg">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Jitter</div>
+                    <div class="stat-value" id="stat-jitter">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Target IP</div>
+                    <div class="stat-value" id="stat-target-ip">—</div>
+                </div>
+            </div>
+            <div class="ping-chart-container">
+                <div class="ping-chart" id="ping-chart"></div>
+            </div>
+            <pre id="ping-output" class="output-panel">Click "Start Ping" to begin.</pre>
+        </div>
+
+        <!-- Traceroute results -->
+        <div id="traceroute-results" class="results-container" style="display:none">
+            <div id="trace-map" class="trace-map"></div>
+            <pre id="trace-output" class="output-panel">Click "Start Traceroute" to begin.</pre>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by xiuzhi. <a href="https://ko-fi.com/xiuzhi" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a></p>
+    </footer>
+
+    <script src="../theme.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
